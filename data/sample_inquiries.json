@@ -1,0 +1,23 @@
+
+[
+  {
+    "id": "L001",
+    "inquiry": "We are a retail company looking for an AI chatbot integrated with our CRM. Our budget is ₹2 lakh and we want a prototype in four weeks."
+  },
+  {
+    "id": "L002",
+    "inquiry": "We need a custom web application for managing inventory. Please share your software development approach."
+  },
+  {
+    "id": "L003",
+    "inquiry": "Can you automate invoice processing and extract fields from PDF documents?"
+  },
+  {
+    "id": "L004",
+    "inquiry": "Interested in your services. Please contact me."
+  },
+  {
+    "id": "L005",
+    "inquiry": "We want a voice AI assistant for handling customer support calls and connecting to our existing CRM."
+  }
+]
