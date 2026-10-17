@@ -320,7 +320,52 @@ st.markdown(
         border-radius: 9px !important;
     }
 
+
+    /* Clear, readable Streamlit buttons */
+    div[data-testid="stButton"] > button {
+    width: 100% !important;
+    min-height: 44px !important;
+    border-radius: 9px !important;
+    font-weight: 700 !important;
+    font-size: 0.85rem !important;
+    transition: all 0.18s ease !important;
+}
+
+/* Load sample: dark background, readable teal text */
+    div[data-testid="stButton"] button[data-testid="stBaseButton-secondary"] {
+    background: #102334 !important;
+    color: #8BE0D0 !important;
+    border: 1px solid #35B9A4 !important;
+}
+
+    div[data-testid="stButton"] button[data-testid="stBaseButton-secondary"] p {
+    color: #8BE0D0 !important;
+}
+
+/* Analyze opportunity: bright teal background, dark text */
+    div[data-testid="stButton"] button[data-testid="stBaseButton-primary"] {
+    background: #8BE0D0 !important;
+    color: #071823 !important;
+    border: 1px solid #8BE0D0 !important;
+    box-shadow: 0 6px 20px rgba(53, 185, 164, 0.14) !important;
+}
+
+    div[data-testid="stButton"] button[data-testid="stBaseButton-primary"] p {
+    color: #071823 !important;
+}
+
+    div[data-testid="stButton"] button:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+}
+
+    div[data-testid="stButton"] button:disabled {
+    opacity: 0.55 !important;
+    transform: none !important;
+}
+
     /* Buttons */
+
 
     .stButton > button,
     .stDownloadButton > button {
@@ -680,6 +725,13 @@ st.write("")
 
 samples = load_samples()
 
+# Prefill the first demo inquiry once per session.
+if "sample_initialized" not in st.session_state:
+    if samples:
+        st.session_state.inquiry_text = sample_text(samples[0])
+
+    st.session_state.sample_initialized = True
+
 sample_options = ["— Enter inquiry manually —"]
 sample_lookup = {}
 
@@ -697,11 +749,12 @@ sample_col, load_col = st.columns([3, 1], vertical_alignment="bottom")
 
 with sample_col:
     selected_sample = st.selectbox(
-        "Sample inquiry",
-        options=sample_options,
-        index=0,
-        help="Choose an example to load into the inquiry editor.",
-    )
+    "Choose an inquiry to try",
+    options=sample_options,
+    index=1 if samples else 0,
+    help="Start with AI + CRM Automation or select another demo inquiry.",
+)
+
 
 with load_col:
     load_clicked = st.button(
